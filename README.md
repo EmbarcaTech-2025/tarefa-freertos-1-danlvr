@@ -77,7 +77,7 @@ Este projeto demonstra o uso do sistema operacional de tempo real (RTOS) FreeRTO
 
 ## 📸 Demonstração do funcionamento
 
-![Demonstração da Tábua de Galton](assets/galton_board_sim.gif)
+![Demonstração RTOS](assets/rtos.gif)
 
 ## 📊 Resultados Esperados/Observados
 
@@ -127,7 +127,7 @@ Determinar qual tarefa consome mais tempo de CPU sem ferramentas de profiling es
 -   A `button_task` executa a cada 100ms (`vTaskDelay(pdMS_TO_TICKS(100))`). Dentro de seu loop, ela lê dois GPIOs e realiza algumas comparações lógicas. O consumo é relativamente baixo, mas mais frequente que as tarefas de LED e buzzer quando estão em seus longos delays.
 -   A `oled_task` executa a cada 250ms (`vTaskDelay(pdMS_TO_TICKS(250))`). Dentro de seu loop, ela chama `eTaskGetState()` duas vezes, `ssd1306_clear()`, `sprintf()` duas vezes, `ssd1306_draw_string()` duas vezes e `ssd1306_show()`. As operações de manipulação de strings e, especialmente, a comunicação I2C com o display (`ssd1306_show()`) podem ser comparativamente mais intensivas em termos de CPU e tempo de barramento.
 
-**Conclusão provável:** A `oled_task` é a candidata mais provável a consumir mais tempo de CPU devido às operações de renderização e comunicação I2C, seguida pela `button_task` devido à sua frequência de execução, embora com operações mais simples. As tarefas `led_task` e `buzzer_task` provavelmente consomem menos tempo de CPU devido aos seus longos períodos de bloqueio. Para uma medição precisa, seria necessário usar as funcionalidades de estatísticas de tempo de execução do FreeRTOS (`configGENERATE_RUN_TIME_STATS`).
+**Conclusão:** A `oled_task` é a candidata mais provável a consumir mais tempo de CPU devido às operações de renderização e comunicação I2C, seguida pela `button_task` devido à sua frequência de execução, embora com operações mais simples. As tarefas `led_task` e `buzzer_task` provavelmente consomem menos tempo de CPU devido aos seus longos períodos de bloqueio. Para uma medição precisa, seria necessário usar as funcionalidades de estatísticas de tempo de execução do FreeRTOS (`configGENERATE_RUN_TIME_STATS`).
 
 ### Quais seriam os riscos de usar polling sem prioridades (ou em um sistema sem RTOS)?
 Usar polling em um sistema sem um RTOS (superloop) ou em um RTOS onde todas as tarefas relevantes rodam com a mesma prioridade e usam polling intensivo apresenta vários riscos:

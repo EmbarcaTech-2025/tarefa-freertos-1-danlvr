@@ -77,7 +77,8 @@ Este projeto demonstra o uso do sistema operacional de tempo real (RTOS) FreeRTO
 
 ## 📸 Demonstração do funcionamento
 
-![Demonstração RTOS](assets/rtos.gif)
+<video width="700" height="500" src="https://github.com/user-attachments/assets/b54d6f7d-a8b6-4cf7-8c22-c8835f952aad.mp4"></video>
+
 
 ## 📊 Resultados Esperados/Observados
 
